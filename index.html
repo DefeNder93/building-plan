@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="lib/jquery.imagemapster.min.js"></script>
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="node_modules/angular-touch/angular-touch.min.js"></script>
@@ -10,13 +12,17 @@
     <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
 
     <script src="app/app.js"></script>
+    <script src="app/api.srv.js"></script>
+    <script src="app/buildingInfo/buildingInfo.ctrl.js"></script>
+    <script src="app/login/login.js"></script>
+    <script src="app/edit/edit.js"></script>
+    <script src="app/editImage/editImage.dir.js"></script>
+    <script src="app/editImage/imageMap.dir.js"></script>
 
     <title>Building Plan</title>
 </head>
 <body>
 <header ng-include="'app/header.html'"></header>
-<a ui-sref="hello" ui-sref-active="active">Hello</a>
-<a ui-sref="about" ui-sref-active="active">About</a>
 
 <ui-view></ui-view>
 </body>

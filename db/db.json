@@ -1,0 +1,32 @@
+{
+  "buildings": [
+    {
+      "id": "1",
+      "name": "Main Building",
+      "floors": [
+        {
+          "name": "1 floor",
+          "picture": "/picture/main.svg",
+          "facilities": [
+            {
+              "name": "room. 101",
+              "location": [1, 2, 3, 4],
+              "info": {
+                "belonging": "Department of Nuclear Physics",
+                "type": "laboratory",
+                "square": "28 kwm",
+                "places":  25,
+                "equipment": [
+                  {
+                    "name": "Table",
+                    "number":  2334
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

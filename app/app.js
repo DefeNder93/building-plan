@@ -7,12 +7,17 @@ var app = angular.module('buildingPlan', [
 
 app.config(function($stateProvider) {
     $stateProvider.state({
-        name: 'hello',
-        url: '/hello',
-        template: '<h3>hello world!</h3>'
+        name: 'buildingInfo',
+        url: '/building-info',
+        controller: 'buildingInfo',
+        templateUrl: 'app/buildingInfo/buildingInfo.html'
     }).state({
-        name: 'about',
-        url: '/about',
-        template: '<h3>Its the UI-Router hello world app!</h3>'
+        name: 'login',
+        url: '/login',
+        templateUrl: 'app/login/login.html'
+    }).state({
+        name: 'edit',
+        url: '/edit',
+        templateUrl: 'app/edit/edit.html'
     });
 });
