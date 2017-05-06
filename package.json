@@ -1,0 +1,29 @@
+{
+  "name": "building-plan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefeNder93/building-plan.git"
+  },
+  "author": "Aleksey Knyazev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DefeNder93/building-plan/issues"
+  },
+  "homepage": "https://github.com/DefeNder93/building-plan#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-touch": "^1.6.4",
+    "angular-ui-bootstrap": "^2.5.0",
+    "@uirouter/angularjs": "^1.0.0"
+  }
+}
