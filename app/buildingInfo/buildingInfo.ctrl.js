@@ -5,6 +5,9 @@ app.controller("buildingInfo", function($scope, Api) {
         building: null,
         floor: null
     };
+    $scope.state = {
+        draw: false
+    };
     Api.getBuildings().then(function(r){
         $scope.buildings = r.data;
         $scope.chooseBuilding($scope.buildings[0]);
@@ -18,5 +21,8 @@ app.controller("buildingInfo", function($scope, Api) {
     };
     $scope.chooseFloor = function(floor) {
         $scope.active.floor = floor;
-    }
+    };
+    $scope.saveDraw = function() {
+        console.log('$scope.saveDraw');
+    };
 });

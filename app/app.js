@@ -15,10 +15,5 @@ app.config(function($stateProvider) {
         name: 'login',
         url: '/login',
         templateUrl: 'app/login/login.html'
-    }).state({
-        name: 'edit',
-        url: '/edit',
-        controller: 'edit',
-        templateUrl: 'app/edit/edit.html'
     });
 });

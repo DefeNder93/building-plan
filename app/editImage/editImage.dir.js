@@ -3,7 +3,8 @@ app.directive('editImage', function ($http) {
         restrict: 'E',
         scope: {
             editable: '<',
-            api: '='
+            api: '=',
+            imageLink: '='
         },
         link: function(scope, el, attrs) {
             scope.api = {
@@ -36,8 +37,16 @@ app.directive('editImage', function ($http) {
             
             var draw = SVG('edit-image').size(1899, 1602);
 
-            $http.get('img/floor1.svg').then(function(r){
-                draw.svg(r.data);
+            scope.$watch('imageLink',function(link){
+                if (link) {
+                    $http.get(link).then(function(r){
+                        drawSvg(r.data);
+                    });
+                }
+            });
+
+            function drawSvg(data) {
+                draw.svg(data);
                 draw.click(function(e) {
                     if (!scope.editable) {
                         return;
@@ -62,7 +71,7 @@ app.directive('editImage', function ($http) {
                         this.move(e.detail.p.x-4, e.detail.p.y-4)
                     })
                 });
-            });
+            }
         }
     };
 });

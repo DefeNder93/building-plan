@@ -7,13 +7,29 @@
             <div class="col-sm-12">
                 <button ng-click="chooseFloor(floor)" ng-repeat="floor in floors">{{::floor.name}}</button>
             </div>
+
+            <button ng-hide="state.draw" ng-click="state.draw = true" class="btn btn-default">Edit</button>
+            <button ng-show="state.draw" ng-click="state.draw = false; saveDraw()" class="btn btn-default">Save</button>
         </div>
-        <div class="row">
+
+        <div ng-if="!state.draw" class="row">
             <div class="col-sm-12">
                 <div class="scaling-svg-container"
                      style="padding-bottom: 84% /* 100% * 1601/1898 */">
                     <image-map image-link="active.floor.picture" id="image-map"></image-map>
                 </div>
+            </div>
+        </div>
+
+        <div ng-if="state.draw" ng-controller='edit' class="row">
+            <div class="col-sm-12">
+                <button ng-hide="state.edit" ng-click="state.edit = true" class="btn btn-default">Edit</button>
+                <button ng-show="state.edit" ng-click="state.edit = false; save()" class="btn btn-default">Save</button>
+
+                <button ng-click="editImageApi.clear()" class="btn btn-default">Clear</button>
+            </div>
+            <div class="col-sm-12">
+                <edit-image image-link="active.floor.picture" api="editImageApi" editable="state.edit" id="edit-image"></edit-image>
             </div>
         </div>
 
