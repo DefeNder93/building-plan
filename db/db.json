@@ -1,12 +1,12 @@
 {
   "buildings": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Main Building",
       "floors": [
         {
           "name": "1 floor",
-          "picture": "/picture/main.svg",
+          "picture": "img/floor1.svg",
           "facilities": [
             {
               "name": "room. 101",
@@ -25,8 +25,60 @@
               }
             }
           ]
+        },
+        {
+          "name": "2 floor",
+          "picture": "img/floor2.svg",
+          "facilities": [
+            {
+              "name": "room. 200",
+              "location": [1, 2, 3, 4],
+              "info": {
+                "belonging": "Department of Nuclear Physics",
+                "type": "laboratory",
+                "square": "25 kwm",
+                "places":  28,
+                "equipment": [
+                  {
+                    "name": "Table",
+                    "number":  2334
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Secondary Building",
+      "floors": [
+        {
+          "name": "1 floor",
+          "picture": "img/floor3.svg",
+          "facilities": [
+            {
+              "name": "room. 200",
+              "location": [1, 2, 3, 4],
+              "info": {
+                "belonging": "Department of Nuclear Physics",
+                "type": "laboratory",
+                "square": "28 kwm",
+                "places":  25,
+                "equipment": [
+                  {
+                    "name": "Table",
+                    "number":  2334
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     }
+
+
   ]
 }

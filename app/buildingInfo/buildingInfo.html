@@ -1,16 +1,18 @@
 <div style="padding: 30px" class="row">
-    <div class="col-sm-2">menu</div>
+    <div class="col-sm-2">
+        <button ng-click="chooseBuilding(building)" ng-repeat="building in buildings">{{::building.name}}</button>
+    </div>
     <div class="col-sm-10">
         <div class="row">
             <div class="col-sm-12">
-                top menu
+                <button ng-click="chooseFloor(floor)" ng-repeat="floor in floors">{{::floor.name}}</button>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="scaling-svg-container"
                      style="padding-bottom: 84% /* 100% * 1601/1898 */">
-                    <image-map id=image-map></image-map>
+                    <image-map image-link="active.floor.picture" id="image-map"></image-map>
                 </div>
             </div>
         </div>
