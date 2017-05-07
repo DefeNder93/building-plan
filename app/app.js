@@ -18,6 +18,7 @@ app.config(function($stateProvider) {
     }).state({
         name: 'edit',
         url: '/edit',
+        controller: 'edit',
         templateUrl: 'app/edit/edit.html'
     });
 });

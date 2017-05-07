@@ -1,3 +1,12 @@
-/**
- * Created by Alex on 5/6/2017.
- */
+app.controller('edit', function($scope, Api) {
+    $scope.state = {
+        edit: false
+    };
+    $scope.editImageApi = {};
+    $scope.save = function() {
+        $scope.editImageApi.save();
+    };
+    $scope.saveTransformed = function() {
+        console.log('saveTransformed');
+    };
+});
