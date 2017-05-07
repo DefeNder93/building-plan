@@ -6,7 +6,4 @@ app.controller('edit', function($scope, Api) {
     $scope.save = function() {
         $scope.editImageApi.save();
     };
-    $scope.saveTransformed = function() {
-        console.log('saveTransformed');
-    };
 });

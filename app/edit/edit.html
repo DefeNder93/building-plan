@@ -6,15 +6,12 @@
                 <button ng-hide="state.edit" ng-click="state.edit = true" class="btn btn-default">Edit</button>
                 <button ng-show="state.edit" ng-click="state.edit = false; save()" class="btn btn-default">Save</button>
 
-                <button ng-show="!state.transform && !state.edit" ng-click="state.transform = true" class="btn btn-default">Transform</button>
-                <button ng-show="state.transform && !state.edit" ng-click="state.transform = false; saveTransformed()" class="btn btn-default">Save</button>
-
                 <button ng-click="editImageApi.clear()" class="btn btn-default">Clear</button>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <edit-image api="editImageApi" editable="state.edit" id="edit-draw"></edit-image>
+                <edit-image api="editImageApi" editable="state.edit" id="edit-image"></edit-image>
             </div>
         </div>
     </div>

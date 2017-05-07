@@ -34,7 +34,8 @@ app.directive('editImage', function ($http) {
                 polygon.fill('#f06');
             }
             
-            var draw = SVG('edit-draw').size(1200, 500);
+            var draw = SVG('edit-image').size(1899, 1602);
+
             $http.get('img/floor1.svg').then(function(r){
                 draw.svg(r.data);
                 draw.click(function(e) {
@@ -60,9 +61,7 @@ app.directive('editImage', function ($http) {
                         this.node.parentElement.appendChild(this.node);
                         this.move(e.detail.p.x-4, e.detail.p.y-4)
                     })
-
                 });
-
             });
         }
     };
