@@ -14,8 +14,7 @@ app.directive('editImage', function ($http) {
 
             var points = [],
                 polygon = null;
-
-
+            
             function clear() {
                 points.forEach(function(point){
                     point.figure.remove();
@@ -35,7 +34,7 @@ app.directive('editImage', function ($http) {
                 polygon.fill('#f06');
             }
             
-            var draw = SVG('edit-image').size(1899, 1602);
+            var draw;
 
             scope.$watch('imageLink',function(link){
                 if (link) {
@@ -46,7 +45,7 @@ app.directive('editImage', function ($http) {
             });
 
             function drawSvg(data) {
-                draw.svg(data);
+                createSvg(data);
                 draw.click(function(e) {
                     if (!scope.editable) {
                         return;
@@ -71,6 +70,12 @@ app.directive('editImage', function ($http) {
                         this.move(e.detail.p.x-4, e.detail.p.y-4)
                     })
                 });
+            }
+
+            function createSvg(data) {
+                draw && (draw.remove());
+                draw = SVG('edit-image').size(1899, 1602);
+                draw.svg(data);
             }
         }
     };
