@@ -20,9 +20,11 @@ app.controller("buildingInfo", function($scope, Building) {
         $scope.active.building = building;
         $scope.active.floor = building.floors[0];
         $scope.floors = building.floors;
+        $scope.active.polygon = null;
     };
     $scope.chooseFloor = function(floor) {
         $scope.active.floor = floor;
+        $scope.active.polygon = null;
     };
     $scope.savePolygons = function(polygons) {
         $scope.active.floor.polygons = polygons;
