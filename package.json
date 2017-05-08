@@ -23,6 +23,7 @@
     "@uirouter/angularjs": "^1.0.0",
     "angular": "^1.6.4",
     "angular-animate": "^1.6.4",
+    "angular-local-storage": "^0.5.2",
     "angular-touch": "^1.6.4",
     "angular-ui-bootstrap": "^2.5.0",
     "express": "^4.15.2",

@@ -1,4 +1,4 @@
-app.controller("buildingInfo", function($scope, Api) {
+app.controller("buildingInfo", function($scope, Building) {
     $scope.buildings = [];
     $scope.floors = [];
     $scope.active = {
@@ -8,8 +8,8 @@ app.controller("buildingInfo", function($scope, Api) {
     $scope.state = {
         draw: false
     };
-    Api.getBuildings().then(function(r){
-        $scope.buildings = r.data;
+    Building.getBuildings().then(function(data){
+        $scope.buildings = data;
         $scope.chooseBuilding($scope.buildings[0]);
     }).catch(function(){
         console.log('error');

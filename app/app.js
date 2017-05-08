@@ -2,7 +2,8 @@ var app = angular.module('buildingPlan', [
     'ngAnimate',
     'ngTouch',
     'ui.bootstrap',
-    'ui.router'
+    'ui.router',
+    'LocalStorageModule'
 ]);
 
 app.config(function($stateProvider) {
@@ -16,4 +17,10 @@ app.config(function($stateProvider) {
         url: '/login',
         templateUrl: 'app/login/login.html'
     });
+});
+
+
+app.config(function (localStorageServiceProvider) {
+    localStorageServiceProvider
+        .setPrefix('bPlan');
 });
