@@ -9,7 +9,7 @@
             </div>
 
             <button ng-hide="state.draw" ng-click="state.draw = true" class="btn btn-default">Edit</button>
-            <button ng-show="state.draw" ng-click="state.draw = false; saveDraw()" class="btn btn-default">Save</button>
+            <button ng-show="state.draw" ng-click="state.draw = false; save()" class="btn btn-default">Save</button>
         </div>
 
         <div ng-if="!state.draw" class="row">
@@ -24,12 +24,12 @@
         <div ng-if="state.draw" ng-controller='edit' class="row">
             <div class="col-sm-12">
                 <button ng-hide="state.edit" ng-click="state.edit = true" class="btn btn-default">Edit</button>
-                <button ng-show="state.edit" ng-click="state.edit = false; save()" class="btn btn-default">Save</button>
+                <button ng-show="state.edit" ng-click="state.edit = false; save()" class="btn btn-default">Create Polygon</button>
 
                 <button ng-click="editImageApi.clear()" class="btn btn-default">Clear</button>
             </div>
             <div class="col-sm-12">
-                <edit-image image-link="active.floor.picture" api="editImageApi" editable="state.edit" id="edit-image"></edit-image>
+                <edit-image image-link="active.floor.picture" polygons="active.floor.polygons" save="savePolygons(polygons)" api="editImageApi" editable="state.edit" id="edit-image"></edit-image>
             </div>
         </div>
 

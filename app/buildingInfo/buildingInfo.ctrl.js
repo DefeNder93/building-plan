@@ -22,7 +22,7 @@ app.controller("buildingInfo", function($scope, Building) {
     $scope.chooseFloor = function(floor) {
         $scope.active.floor = floor;
     };
-    $scope.saveDraw = function() {
-        console.log('$scope.saveDraw');
+    $scope.savePolygons = function(polygons) {
+        $scope.active.floor.polygons = polygons;
     };
 });
