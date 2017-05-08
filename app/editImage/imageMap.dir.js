@@ -1,4 +1,4 @@
-app.directive('imageMap', function ($http) {
+app.directive('imageMap', function ($http, consts) {
     return {
         restrict: 'E',
         scope: {
@@ -24,16 +24,17 @@ app.directive('imageMap', function ($http) {
                 }
                 scope.polygons.forEach(function(polygon){
                     drawPolygon(polygon);
+                    polygon.active = false;
                     polygon.figure.mouseover(function(e){
                         var polygon = getPolygonByTargetNode(e.target);
                         if (!polygon.active) {
-                            polygon.figure.fill('green');
+                            polygon.figure.fill(consts.POLYGON_HOVER_COLOR);
                         }
                     });
                     polygon.figure.mouseout(function(e){
                         var polygon = getPolygonByTargetNode(e.target);
                         if (!polygon.active) {
-                            polygon.figure.fill('#f06');
+                            polygon.figure.fill(consts.POLYGON_COLOR);
                         }
                     });
                     polygon.figure.click(function(e){
@@ -46,11 +47,11 @@ app.directive('imageMap', function ($http) {
 
             function setActive(polygon) {
                 scope.polygons.forEach(function(el){
-                    el.figure.fill('#f06');
+                    el.figure.fill(consts.POLYGON_COLOR);
                     el.active = false;
                 });
                 polygon.active = true;
-                polygon.figure.fill('blue');
+                polygon.figure.fill(consts.POLYGON_ACTIVE_COLOR);
             }
 
             function getPolygonByTargetNode(target) {
@@ -68,7 +69,7 @@ app.directive('imageMap', function ($http) {
                     coords.push(point.x, point.y);
                 });
                 polygon.figure = draw.polygon(coords);
-                polygon.figure.fill('#f06');
+                polygon.figure.fill(consts.POLYGON_COLOR);
             }
 
             function createSvg(data) {

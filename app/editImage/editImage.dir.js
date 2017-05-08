@@ -1,4 +1,4 @@
-app.directive('editImage', function ($http) {
+app.directive('editImage', function ($http, consts) {
     return {
         restrict: 'E',
         scope: {
@@ -42,7 +42,7 @@ app.directive('editImage', function ($http) {
                 points.forEach(function(point){
                     point.figure.node.parentElement.appendChild(point.figure.node);
                 });
-                polygon.figure.fill('#f06');
+                polygon.figure.fill(consts.POLYGON_COLOR);
                 polygon.points = [].concat(points);
                 polygons.push(polygon);
                 points = [];
@@ -61,7 +61,7 @@ app.directive('editImage', function ($http) {
                         point.figure.node.parentElement.appendChild(point.figure.node);
                     }
                 });
-                polygon.figure.fill('#f06');
+                polygon.figure.fill(consts.POLYGON_COLOR);
             }
             
             var draw;
@@ -81,6 +81,7 @@ app.directive('editImage', function ($http) {
                 }
                 polygons = scope.polygons;
                 polygons.forEach(function(polygon){
+                    polygon.active = false;
                     drawPolygon(polygon);
                     polygon.points.forEach(function(el){
                         el.figure = drawPoint(el.x, el.y);
@@ -103,7 +104,7 @@ app.directive('editImage', function ($http) {
             }
 
             function drawPoint(x,y) {
-                var point = draw.circle(8).fill('green').move(x-4, y-4);
+                var point = draw.circle(8).fill(consts.POINT_COLOR).move(x-4, y-4);
                 point.draggable().on('dragend', dragPoint);
                 return point;
             }
