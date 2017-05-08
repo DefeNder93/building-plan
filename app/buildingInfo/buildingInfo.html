@@ -1,15 +1,26 @@
 <div style="padding: 30px" class="row">
     <div class="col-sm-2">
-        <button ng-click="chooseBuilding(building)" ng-repeat="building in buildings">{{::building.name}}</button>
+        <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="building in buildings" ng-class="{'active' : building === active.building}"><a ng-click="chooseBuilding(building)"
+                 href="javascript:void(0)">{{::building.name}}</a></li>
+        </ul>
     </div>
     <div class="col-sm-10">
         <div class="row">
             <div class="col-sm-12">
-                <button ng-click="chooseFloor(floor)" ng-repeat="floor in floors">{{::floor.name}}</button>
+                <button class="btn btn-default" ng-class="{'btn-success': floor === active.floor}" ng-click="chooseFloor(floor)" ng-repeat="floor in floors"
+                    style="margin-right: 10px;">{{::floor.name}}</button>
             </div>
+        </div>
 
-            <button ng-hide="state.draw" ng-click="state.draw = true" class="btn btn-default">Edit</button>
-            <button ng-show="state.draw" ng-click="state.draw = false; save()" class="btn btn-default">Save</button>
+        <div class="row">
+            <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 10px">
+                <button ng-hide="state.draw" ng-click="state.draw = true" class="btn btn-default">Edit</button>
+                <button ng-show="state.draw" ng-click="state.draw = false; save()" class="btn btn-default">Save</button>
+
+                <button ng-show="state.draw && !state.edit" ng-click="state.edit = true" class="btn btn-default">Add New Polygon</button>
+                <button ng-show="state.draw && state.edit" ng-click="state.edit = false; save()" class="btn btn-default">Create Polygon</button>
+            </div>
         </div>
 
         <div ng-if="!state.draw" class="row">
@@ -23,10 +34,6 @@
         </div>
 
         <div ng-if="state.draw" ng-controller='edit' class="row">
-            <div class="col-sm-12">
-                <button ng-hide="state.edit" ng-click="state.edit = true" class="btn btn-default">Add New Polygon</button>
-                <button ng-show="state.edit" ng-click="state.edit = false; save()" class="btn btn-default">Create Polygon</button>
-            </div>
             <div class="col-sm-12">
                 <edit-image image-link="active.floor.picture" polygons="active.floor.polygons" save="savePolygons(polygons)" create-polygon="createPolygon(polygon)"
                             api="editImageApi" editable="state.edit" id="edit-image"></edit-image>
