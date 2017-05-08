@@ -15,6 +15,7 @@ app.config(function($stateProvider) {
     }).state({
         name: 'login',
         url: '/login',
+        controller: 'login',
         templateUrl: 'app/login/login.html'
     });
 });

@@ -3,4 +3,7 @@ app.service("Api", function($http) {
     this.getBuildings = function() {
         return $http.get(API_PATH + '/buildings');
     };
+    this.login = function(credentials) {
+        return $http.post(API_PATH + '/login', credentials);
+    };
 });

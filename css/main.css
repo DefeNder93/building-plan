@@ -17,3 +17,19 @@
 #edit-image {
     overflow: scroll;
 }
+
+.login-form {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    min-width: 200px;
+    width: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.success-msg {
+    font-weight: bold;
+    font-size: 18px;
+    color: #3c763d;
+}

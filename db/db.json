@@ -1,4 +1,7 @@
 {
+  "login": {
+    "password": "dfg"
+  },
   "buildings": [
     {
       "id": 1,
@@ -10,16 +13,21 @@
           "facilities": [
             {
               "name": "room. 101",
-              "location": [1, 2, 3, 4],
+              "location": [
+                1,
+                2,
+                3,
+                4
+              ],
               "info": {
                 "belonging": "Department of Nuclear Physics",
                 "type": "laboratory",
                 "square": "28 kwm",
-                "places":  25,
+                "places": 25,
                 "equipment": [
                   {
                     "name": "Table",
-                    "number":  2334
+                    "number": 2334
                   }
                 ]
               }
@@ -32,16 +40,21 @@
           "facilities": [
             {
               "name": "room. 200",
-              "location": [1, 2, 3, 4],
+              "location": [
+                1,
+                2,
+                3,
+                4
+              ],
               "info": {
                 "belonging": "Department of Nuclear Physics",
                 "type": "laboratory",
                 "square": "25 kwm",
-                "places":  28,
+                "places": 28,
                 "equipment": [
                   {
                     "name": "Table",
-                    "number":  2334
+                    "number": 2334
                   }
                 ]
               }
@@ -60,16 +73,21 @@
           "facilities": [
             {
               "name": "room. 200",
-              "location": [1, 2, 3, 4],
+              "location": [
+                1,
+                2,
+                3,
+                4
+              ],
               "info": {
                 "belonging": "Department of Nuclear Physics",
                 "type": "laboratory",
                 "square": "28 kwm",
-                "places":  25,
+                "places": 25,
                 "equipment": [
                   {
                     "name": "Table",
-                    "number":  2334
+                    "number": 2334
                   }
                 ]
               }
@@ -78,7 +96,5 @@
         }
       ]
     }
-
-
   ]
 }

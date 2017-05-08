@@ -1,4 +1,4 @@
-app.controller("buildingInfo", function($scope, Building) {
+app.controller('buildingInfo', function($scope, Building) {
     $scope.buildings = [];
     $scope.floors = [];
     $scope.active = {
