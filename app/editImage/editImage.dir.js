@@ -55,7 +55,9 @@ app.directive('editImage', function ($http) {
                 });
                 polygon.figure = draw.polygon(coords);
                 polygon.points.forEach(function(point){
-                    point.figure.node.parentElement.appendChild(point.figure.node);
+                    if (point.figure) {
+                        point.figure.node.parentElement.appendChild(point.figure.node);
+                    }
                 });
                 polygon.figure.fill('#f06');
             }

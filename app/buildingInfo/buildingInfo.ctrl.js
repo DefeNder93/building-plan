@@ -24,5 +24,21 @@ app.controller("buildingInfo", function($scope, Building) {
     };
     $scope.savePolygons = function(polygons) {
         $scope.active.floor.polygons = polygons;
+        // TODO delete svg object
+        Building.setBuildings(deleteFigures($scope.buildings));
     };
+
+    function deleteFigures(buildings) {
+        var buildingsCopy = angular.copy(buildings);
+        buildingsCopy.forEach(function(building){
+            building.floors.forEach(function(floor){
+                floor.polygons && floor.polygons.forEach(function(polygon){
+                    polygon.points.forEach(function(point){
+                        point.figure = null;
+                    });
+                })
+            });
+        });
+        return buildingsCopy;
+    }
 });
