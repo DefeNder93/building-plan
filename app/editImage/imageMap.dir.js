@@ -3,7 +3,8 @@ app.directive('imageMap', function ($http) {
         restrict: 'E',
         scope: {
             imageLink: '=',
-            polygons: '='
+            polygons: '=',
+            setActivePolygon: '&'
         },
         link: function(scope, el, attrs) {
             var draw;
@@ -23,7 +24,42 @@ app.directive('imageMap', function ($http) {
                 }
                 scope.polygons.forEach(function(polygon){
                     drawPolygon(polygon);
+                    polygon.figure.mouseover(function(e){
+                        var polygon = getPolygonByTargetNode(e.target);
+                        if (!polygon.active) {
+                            polygon.figure.fill('green');
+                        }
+                    });
+                    polygon.figure.mouseout(function(e){
+                        var polygon = getPolygonByTargetNode(e.target);
+                        if (!polygon.active) {
+                            polygon.figure.fill('#f06');
+                        }
+                    });
+                    polygon.figure.click(function(e){
+                        var polygon = getPolygonByTargetNode(e.target);
+                        scope.setActivePolygon({polygon: polygon});
+                        setActive(polygon);
+                    });
                 });
+            }
+
+            function setActive(polygon) {
+                scope.polygons.forEach(function(el){
+                    el.figure.fill('#f06');
+                    el.active = false;
+                });
+                polygon.active = true;
+                polygon.figure.fill('blue');
+            }
+
+            function getPolygonByTargetNode(target) {
+                for (var i=0; i<scope.polygons.length; i++) {
+                    if (scope.polygons[i].figure.node === target) {
+                        return scope.polygons[i];
+                    }
+                }
+                return null;
             }
 
             function drawPolygon(polygon) {

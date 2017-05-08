@@ -3,10 +3,12 @@ app.controller("buildingInfo", function($scope, Building) {
     $scope.floors = [];
     $scope.active = {
         building: null,
-        floor: null
+        floor: null,
+        polygon: null
     };
     $scope.state = {
-        draw: false
+        draw: false,
+        editInfo: false
     };
     Building.getBuildings().then(function(data){
         $scope.buildings = data;
@@ -25,7 +27,22 @@ app.controller("buildingInfo", function($scope, Building) {
     $scope.savePolygons = function(polygons) {
         $scope.active.floor.polygons = polygons;
         // TODO delete svg object
+        $scope.saveBuildings();
+    };
+    $scope.initPolygonInfo = function(polygon) {
+        if (!polygon.info) {
+            polygon.info = {};
+        }
+    };
+    $scope.saveBuildings = function() {
         Building.setBuildings(deleteFigures($scope.buildings));
+    };
+    $scope.createPolygon = function(polygon) {
+        // TODO
+    };
+    $scope.setActivePolygon = function(polygon) {
+        $scope.active.polygon = polygon;
+        $scope.$digest();
     };
 
     function deleteFigures(buildings) {
