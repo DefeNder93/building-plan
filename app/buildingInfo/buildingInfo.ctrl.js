@@ -46,6 +46,14 @@ app.controller('buildingInfo', function($scope, Building) {
         $scope.active.polygon = polygon;
         $scope.$digest();
     };
+    $scope.deleteSelectedPolygon = function() {
+        if (!$scope.active.floor || !$scope.active.floor.polygons || !$scope.active.polygon) {
+            return;
+        }
+        $scope.active.polygon.figure.remove();
+        $scope.active.floor.polygons.splice($scope.active.floor.polygons.indexOf($scope.active.polygon), 1);
+        $scope.saveBuildings();
+    };
 
     function deleteFigures(buildings) {
         var buildingsCopy = angular.copy(buildings);
