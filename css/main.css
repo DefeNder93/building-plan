@@ -44,6 +44,10 @@ header {
     margin-left: 0;
 }
 
-.btn-right-offset {
+.right-offset {
     margin-right: 10px;
+}
+
+.bottom-offset {
+    margin-bottom: 10px;
 }
