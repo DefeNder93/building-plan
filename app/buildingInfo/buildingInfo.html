@@ -56,31 +56,31 @@
                             <th scope="row">Принадлежность</th>
                             <td>
                                 <span ng-hide="state.editInfo">{{active.polygon.info.belonging ? active.polygon.info.belonging : '-'}}</span>
-                                <input type="text" ng-show="state.editInfo" ng-model="active.polygon.info.belonging" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.belonging" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
                             </td>
                             <th scope="row">Тип помещения</th>
                             <td>
                                 <span ng-hide="state.editInfo">{{active.polygon.info.type ? active.polygon.info.type : '-'}}</span>
-                                <input type="text" ng-show="state.editInfo" ng-model="active.polygon.info.type" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.type" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Площадь помещения</th>
                             <td>
                                 <span ng-hide="state.editInfo">{{active.polygon.info.square ? active.polygon.info.square : '-'}}</span>
-                                <input type="text" ng-show="state.editInfo" ng-model="active.polygon.info.square" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.square" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
                             </td>
                             <th scope="row">Количество посадочных мест</th>
                             <td>
                                 <span ng-hide="state.editInfo">{{active.polygon.info.places ? active.polygon.info.places : '-'}}</span>
-                                <input type="text" ng-show="state.editInfo" ng-model="active.polygon.info.places" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.places" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Оборудование</th>
                             <td>
                                 <span ng-hide="state.editInfo">{{active.polygon.info.equipment ? active.polygon.info.equipment : '-'}}</span>
-                                <input type="text" ng-show="state.editInfo" ng-model="active.polygon.info.equipment" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.equipment" ng-change="initPolygonInfo(active.polygon); saveBuildings()">
                             </td>
                             <th scope="row"></th>
                             <td></td>
