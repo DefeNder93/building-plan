@@ -37,3 +37,13 @@ header {
     font-size: 18px;
     color: #3c763d;
 }
+
+#building-info {
+    padding: 30px;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.btn-right-offset {
+    margin-right: 10px;
+}
