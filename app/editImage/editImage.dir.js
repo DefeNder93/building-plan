@@ -1,4 +1,4 @@
-app.directive('editImage', function ($http, consts) {
+app.directive('editImage', function ($http, consts, $timeout) {
     return {
         restrict: 'E',
         scope: {
@@ -10,11 +10,13 @@ app.directive('editImage', function ($http, consts) {
             createPolygon: '&'
         },
         link: function(scope, el, attrs) {
-            scope.api = {
-                clear: clear,
-                save: createPolygon
-            };
-
+            $timeout(function(){
+                scope.api = {
+                    clear: clear,
+                    save: createPolygon
+                };
+            });
+            
             var points = [],
                 polygons = [];
             

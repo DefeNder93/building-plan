@@ -8,7 +8,8 @@ app.controller('buildingInfo', function($scope, Building) {
     };
     $scope.state = {
         draw: false,
-        editInfo: false
+        editInfo: false,
+        edit: false
     };
     Building.getBuildings().then(function(data){
         $scope.buildings = data;
@@ -68,4 +69,12 @@ app.controller('buildingInfo', function($scope, Building) {
         });
         return buildingsCopy;
     }
+
+    $scope.api = {
+        editImageApi: {}
+    };
+    $scope.save = function() {
+        $scope.api.editImageApi.save();
+    };
+
 });

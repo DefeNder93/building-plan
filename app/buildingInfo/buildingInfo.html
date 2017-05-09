@@ -33,10 +33,10 @@
             </div>
         </div>
 
-        <div ng-if="state.draw" ng-controller='edit' class="row">
+        <div ng-if="state.draw" class="row">
             <div class="col-sm-12">
                 <edit-image image-link="active.floor.picture" polygons="active.floor.polygons" save="savePolygons(polygons)" create-polygon="createPolygon(polygon)"
-                            api="editImageApi" editable="state.edit" id="edit-image"></edit-image>
+                            api="api.editImageApi" editable="state.edit" id="edit-image"></edit-image>
             </div>
         </div>
 
