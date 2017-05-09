@@ -7,8 +7,7 @@ app.controller('login', function($scope, Api) {
         Api.login($scope.credentials).then(function(){
             $scope.state.success = true;
         }).catch(function(){
-            // TODO
-            console.log('login error');
+            console.log('Login server error');
         })
     }
 });

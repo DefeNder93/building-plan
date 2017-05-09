@@ -15,7 +15,7 @@ app.controller('buildingInfo', function($scope, Building) {
         $scope.buildings = data;
         $scope.chooseBuilding($scope.buildings[0]);
     }).catch(function(){
-        console.log('error');
+        console.log('Get buildings server error');
     });
     $scope.chooseBuilding = function(building) {
         $scope.active.building = building;
@@ -29,7 +29,6 @@ app.controller('buildingInfo', function($scope, Building) {
     };
     $scope.savePolygons = function(polygons) {
         $scope.active.floor.polygons = polygons;
-        // TODO delete svg object
         $scope.saveBuildings();
     };
     $scope.initPolygonInfo = function(polygon) {
@@ -38,7 +37,7 @@ app.controller('buildingInfo', function($scope, Building) {
         }
     };
     $scope.saveBuildings = function() {
-        Building.setBuildings(deleteFigures($scope.buildings));
+        Building.setBuildings(deleteSvgFigures($scope.buildings));
     };
     $scope.setActivePolygon = function(polygon) {
         $scope.active.polygon = polygon;
@@ -53,7 +52,7 @@ app.controller('buildingInfo', function($scope, Building) {
         $scope.saveBuildings();
     };
 
-    function deleteFigures(buildings) {
+    function deleteSvgFigures(buildings) {
         var buildingsCopy = angular.copy(buildings);
         buildingsCopy.forEach(function(building){
             building.floors.forEach(function(floor){
