@@ -6,8 +6,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
             polygons: '<',
             api: '=',
             imageLink: '=',
-            save: '&',
-            createPolygon: '&'
+            save: '&'
         },
         link: function(scope, el, attrs) {
             $timeout(function(){
@@ -16,7 +15,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
                     save: createPolygon
                 };
             });
-            
+
             var points = [],
                 polygons = [];
             
@@ -48,7 +47,6 @@ app.directive('editImage', function ($http, consts, $timeout) {
                 polygon.points = [].concat(points);
                 polygons.push(polygon);
                 points = [];
-                scope.createPolygon({polygon: polygon});
                 scope.save({polygons: polygons});
             }
 

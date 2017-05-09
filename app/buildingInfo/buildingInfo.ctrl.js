@@ -40,9 +40,6 @@ app.controller('buildingInfo', function($scope, Building) {
     $scope.saveBuildings = function() {
         Building.setBuildings(deleteFigures($scope.buildings));
     };
-    $scope.createPolygon = function(polygon) {
-        // TODO
-    };
     $scope.setActivePolygon = function(polygon) {
         $scope.active.polygon = polygon;
         $scope.$digest();
