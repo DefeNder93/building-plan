@@ -28,13 +28,13 @@ app.directive('imageMap', function ($http, consts) {
                     polygon.figure.mouseover(function(e){
                         var polygon = getPolygonByTargetNode(e.target);
                         if (!polygon.active) {
-                            polygon.figure.fill(consts.POLYGON_HOVER_COLOR);
+                            polygon.figure.fill(consts.POLYGON_HOVER_COLOR).opacity(consts.POLYGONS_OPACITY);
                         }
                     });
                     polygon.figure.mouseout(function(e){
                         var polygon = getPolygonByTargetNode(e.target);
                         if (!polygon.active) {
-                            polygon.figure.fill(consts.POLYGON_COLOR);
+                            polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
                         }
                     });
                     polygon.figure.click(function(e){
@@ -47,11 +47,11 @@ app.directive('imageMap', function ($http, consts) {
 
             function setActive(polygon) {
                 scope.polygons.forEach(function(el){
-                    el.figure.fill(consts.POLYGON_COLOR);
+                    el.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
                     el.active = false;
                 });
                 polygon.active = true;
-                polygon.figure.fill(consts.POLYGON_ACTIVE_COLOR);
+                polygon.figure.fill(consts.POLYGON_ACTIVE_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
 
             function getPolygonByTargetNode(target) {
@@ -69,7 +69,7 @@ app.directive('imageMap', function ($http, consts) {
                     coords.push(point.x, point.y);
                 });
                 polygon.figure = draw.polygon(coords);
-                polygon.figure.fill(consts.POLYGON_COLOR);
+                polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
 
             function createSvg(data) {

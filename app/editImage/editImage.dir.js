@@ -43,7 +43,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
                 points.forEach(function(point){
                     point.figure.node.parentElement.appendChild(point.figure.node);
                 });
-                polygon.figure.fill(consts.POLYGON_COLOR);
+                polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
                 polygon.points = [].concat(points);
                 polygons.push(polygon);
                 points = [];
@@ -61,7 +61,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
                         point.figure.node.parentElement.appendChild(point.figure.node);
                     }
                 });
-                polygon.figure.fill(consts.POLYGON_COLOR);
+                polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
             
             var draw;
@@ -104,7 +104,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
             }
 
             function drawPoint(x,y) {
-                var point = draw.circle(8).fill(consts.POINT_COLOR).move(x-4, y-4);
+                var point = draw.circle(8).fill(consts.POINT_COLOR).opacity(consts.EDIT_POINTS_OPACITY).move(x-4, y-4);
                 point.draggable().on('dragend', dragPoint);
                 return point;
             }

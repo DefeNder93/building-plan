@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 10px">
                 <button ng-hide="state.draw" ng-click="state.draw = true" class="btn btn-default right-offset">Edit Rooms</button>
-                <button ng-show="state.draw" ng-click="state.draw = false; save()" class="btn btn-default right-offset">View Plan</button>
+                <button ng-show="state.draw" ng-click="state.draw = false; save()" class="btn btn-default right-offset">View</button>
                 <button ng-show="!state.draw && active.polygon" ng-click="deleteSelectedPolygon()" class="btn btn-default">Delete Selected Room</button>
 
                 <button ng-show="state.draw && !state.edit" ng-click="state.edit = true" class="btn btn-default">Add New Room</button>
