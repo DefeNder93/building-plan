@@ -9,7 +9,7 @@ app.controller('buildingInfo', function($scope, Building) {
     $scope.state = {
         draw: false,
         editInfo: false,
-        edit: false
+        editRooms: false
     };
     Building.getBuildings().then(function(data){
         $scope.buildings = data;
@@ -40,7 +40,10 @@ app.controller('buildingInfo', function($scope, Building) {
         Building.setBuildings(deleteSvgFigures($scope.buildings));
     };
     $scope.setActivePolygon = function(polygon) {
+        $scope.resetPolygonInfo();
         $scope.active.polygon = polygon;
+        $scope.state.editInfo = false;
+        $scope.clearOldPolygonInfo();
         $scope.$digest();
     };
     $scope.deleteSelectedPolygon = function() {
@@ -50,6 +53,22 @@ app.controller('buildingInfo', function($scope, Building) {
         $scope.active.polygon.figure.remove();
         $scope.active.floor.polygons.splice($scope.active.floor.polygons.indexOf($scope.active.polygon), 1);
         $scope.saveBuildings();
+    };
+    var oldPolygonInfo = null;
+    $scope.rememberOldPolygonInfo = function() {
+        if (!$scope.active.polygon) {
+            return;
+        }
+        oldPolygonInfo = angular.copy($scope.active.polygon.info);
+    };
+    $scope.clearOldPolygonInfo = function() {
+        oldPolygonInfo = null;
+    };
+
+    $scope.resetPolygonInfo = function() {
+        if (oldPolygonInfo) {
+            $scope.active.polygon.info = angular.copy(oldPolygonInfo);
+        }
     };
 
     function deleteSvgFigures(buildings) {
