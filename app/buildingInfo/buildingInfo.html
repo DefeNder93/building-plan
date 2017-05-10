@@ -8,7 +8,11 @@
     <div class="col-sm-10">
         <div class="row">
             <div class="col-sm-12">
-                <button class="btn btn-default right-offset" ng-class="{'btn-success': floor === active.floor}" ng-click="chooseFloor(floor)" ng-repeat="floor in floors">{{::floor.name}}</button>
+                <button type="button" class="btn btn-default right-offset" ng-class="{'btn-success': floor === active.floor}" ng-click="chooseFloor(floor)"
+                        ng-repeat="floor in floors">{{::floor.name}}</button>
+
+                <button type="button" class="btn btn-default right-offset pull-right" ng-click="plusZoom()">+</button>
+                <button type="button" class="btn btn-default right-offset pull-right" ng-click="minusZoom()">-</button>
             </div>
         </div>
 
@@ -16,7 +20,7 @@
             <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 10px">
                 <button ng-hide="state.draw" ng-click="state.draw = true" class="btn btn-default right-offset">Edit Rooms</button>
                 <button ng-show="state.draw" ng-click="state.draw = false; save()" class="btn btn-default right-offset">View</button>
-                <button ng-show="!state.draw && active.polygon" ng-click="deleteSelectedPolygon()" class="btn btn-default">Delete Selected Room</button>
+                <button ng-show="!state.draw && active.polygon" ng-click="deleteSelectedPolygon(); saveBuildings()" class="btn btn-default">Delete Selected Room</button>
 
                 <button ng-show="state.draw && !state.editRooms" ng-click="state.editRooms = true" class="btn btn-default">Add New Room</button>
                 <button ng-show="state.draw && state.editRooms" ng-click="state.editRooms = false; save()" class="btn btn-default">Create Room</button>
@@ -28,7 +32,7 @@
                 <div class="scaling-svg-container"
                      style="padding-bottom: 84% /* 100% * 1601/1898 */">
                     <image-map polygons="active.floor.polygons" image-link="active.floor.picture" id="image-map"
-                        set-active-polygon="setActivePolygon(polygon)"></image-map>
+                        set-active-polygon="setActivePolygon(polygon); state.editInfo = false"></image-map>
                 </div>
             </div>
         </div>

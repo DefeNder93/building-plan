@@ -42,7 +42,6 @@ app.controller('buildingInfo', function($scope, Building) {
     $scope.setActivePolygon = function(polygon) {
         $scope.resetPolygonInfo();
         $scope.active.polygon = polygon;
-        $scope.state.editInfo = false;
         $scope.clearOldPolygonInfo();
         $scope.$digest();
     };
@@ -52,7 +51,6 @@ app.controller('buildingInfo', function($scope, Building) {
         }
         $scope.active.polygon.figure.remove();
         $scope.active.floor.polygons.splice($scope.active.floor.polygons.indexOf($scope.active.polygon), 1);
-        $scope.saveBuildings();
     };
     var oldPolygonInfo = null;
     $scope.rememberOldPolygonInfo = function() {
