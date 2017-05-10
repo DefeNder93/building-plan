@@ -11,8 +11,8 @@
                 <button type="button" class="btn btn-default right-offset" ng-class="{'btn-success': floor === active.floor}" ng-click="chooseFloor(floor)"
                         ng-repeat="floor in floors">{{::floor.name}}</button>
 
-                <button type="button" class="btn btn-default right-offset pull-right" ng-click="plusZoom()">+</button>
-                <button type="button" class="btn btn-default right-offset pull-right" ng-click="minusZoom()">-</button>
+                <button type="button" class="btn btn-default right-offset pull-right" ng-click="zoomIn()">+</button>
+                <button type="button" class="btn btn-default right-offset pull-right" ng-click="zoomOut()">-</button>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                 <div class="scaling-svg-container"
                      style="padding-bottom: 84% /* 100% * 1601/1898 */">
                     <image-map polygons="active.floor.polygons" image-link="active.floor.picture" id="image-map"
-                        set-active-polygon="setActivePolygon(polygon); state.editInfo = false"></image-map>
+                        set-active-polygon="setActivePolygon(polygon); state.editInfo = false" api="api.imageMapApi"></image-map>
                 </div>
             </div>
         </div>

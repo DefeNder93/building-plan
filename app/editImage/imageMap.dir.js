@@ -4,10 +4,14 @@ app.directive('imageMap', function ($http, consts) {
         scope: {
             imageLink: '=',
             polygons: '=',
-            setActivePolygon: '&'
+            setActivePolygon: '&',
+            api: '='
         },
         link: function(scope, el, attrs) {
             var draw;
+
+            scope.api.zoomIn = zoomIn;
+            scope.api.zoomOut = zoomOut;
 
             scope.$watch('imageLink',function(link){
                 if (link) {
@@ -72,6 +76,7 @@ app.directive('imageMap', function ($http, consts) {
                 polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
 
+            var zoomStep = 20;
             function createSvg(data) {
                 draw && (draw.remove());
                 draw = SVG('image-map').size(1200, 500);
@@ -79,6 +84,47 @@ app.directive('imageMap', function ($http, consts) {
                 draw.attr('viewBox', '0 0 1898.1851 1601.6219');
                 draw.svg(data);
             }
+
+            function zoomIn() {
+                var box = draw.viewbox();
+                draw.viewbox(box.x, box.y, box.width - zoomStep, box.height / box.width * (box.width - zoomStep))
+            }
+
+            function zoomOut() {
+                var box = draw.viewbox();
+                draw.viewbox(box.x, box.y, box.width + zoomStep, box.height / box.width * (box.width + zoomStep))
+            }
+
+            // angular.element(el).scroll(function() {
+            //     console.log('123');
+            // });
+
+            //document.addEventListener('scroll', wheel, true);
+
+            window.onmousewheel = wheel;
+
+            function wheel(event){
+                var delta = 0;
+                if (!event) event = window.event; // IE
+                // Cross browser delta
+                if (event.wheelDelta) {
+                    // IE, Opera, safari, chrome
+                    delta = event.wheelDelta/120;
+                } else if (event.detail) {
+                    // FF
+                    delta = -event.detail/3;
+                }
+                if (delta) {
+                    // Cancel default scroll
+                    if (event.preventDefault) {
+                        event.preventDefault();
+                    }
+                    event.returnValue = false; // для IE
+
+                    delta > 0 ? zoomIn() : zoomOut();
+                }
+            }
+            
         }
     };
 });

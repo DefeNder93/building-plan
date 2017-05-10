@@ -84,7 +84,14 @@ app.controller('buildingInfo', function($scope, Building) {
     }
 
     $scope.api = {
-        editImageApi: {}
+        editImageApi: {},
+        imageMapApi: {}
+    };
+    $scope.zoomIn = function() {
+        $scope.api.imageMapApi.zoomIn();
+    };
+    $scope.zoomOut = function() {
+        $scope.api.imageMapApi.zoomOut();
     };
     $scope.save = function() {
         $scope.api.editImageApi.save();
