@@ -12,6 +12,7 @@ app.directive('imageMap', function ($http, consts, Utils) {
 
             scope.api.zoomIn = zoomIn;
             scope.api.zoomOut = zoomOut;
+            scope.api.resetZoom = resetViewbox;
 
             scope.$watch('imageLink',function(link){
                 if (link) {
@@ -79,10 +80,14 @@ app.directive('imageMap', function ($http, consts, Utils) {
             var zoomStep = consts.IMAGE_ZOOM_STEP || 20;
             function createSvg(data) {
                 draw && (draw.remove());
-                draw = SVG('image-map').size(1200, 500);
+                draw = SVG('image-map').size(1200, 500); //.draggable();
                 draw.attr('class', 'scaling-svg');
-                draw.attr('viewBox', '0 0 1898.1851 1601.6219');
+                resetViewbox();
                 draw.svg(data);
+            }
+
+            function resetViewbox() {
+                draw.viewbox(0, 0, 1898.1851, 1601.6219);  // initial values
             }
 
             function zoomIn() {
@@ -98,6 +103,27 @@ app.directive('imageMap', function ($http, consts, Utils) {
             window.onmousewheel = function(e){
                 Utils.wheel(e, zoomIn, zoomOut);
             };
+
+            window.onmousewheel = function(e){
+                Utils.wheel(e, zoomIn, zoomOut);
+            };
+
+            // drag-n-drop
+            var mousedownCoords = {};
+            angular.element(el).mousedown(function(e){
+                mousedownCoords.x = e.offsetX;
+                mousedownCoords.y = e.offsetY;
+                angular.element('body').css('cursor','move');
+            });
+
+            angular.element(el).mouseup(function(e){
+                if (mousedownCoords.x && mousedownCoords.y) {
+                    var xDifference =  e.offsetX-mousedownCoords.x;
+                    var yDifference =  e.offsetY-mousedownCoords.y;
+                    var viewbox = draw.viewbox();
+                    draw.viewbox({ x: viewbox.x - xDifference, y: viewbox.y - yDifference, width: viewbox.width, height: viewbox.height })
+                }
+            });
         }
     };
 });

@@ -93,6 +93,9 @@ app.controller('buildingInfo', function($scope, Building) {
     $scope.zoomOut = function() {
         $scope.api.imageMapApi.zoomOut();
     };
+    $scope.resetZoom = function() {
+        $scope.api.imageMapApi.resetZoom();
+    };
     $scope.save = function() {
         $scope.api.editImageApi.save();
     };
