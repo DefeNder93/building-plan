@@ -146,14 +146,14 @@ app.directive('editImage', function ($http, consts, $timeout) {
                     console.log('Error! Point was not found.');
                     return;
                 }
-                elements.point.x = e.detail.p.x;
-                elements.point.y = e.detail.p.y;
+                elements.point.x = e.detail.event.offsetX;
+                elements.point.y = e.detail.event.offsetY;
                 elements.polygon.figure && elements.polygon.figure.remove();
                 drawPolygon(elements.polygon);
                 scope.save({polygons: polygons});
                 e.preventDefault();
                 this.node.parentElement.appendChild(this.node);
-                this.move(e.detail.p.x-4, e.detail.p.y-4)
+                this.move(e.detail.event.offsetX-4, e.detail.event.offsetY-4)
             }
 
             function getElementsByTargetNode(target) {
