@@ -3,6 +3,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
         restrict: 'E',
         scope: {
             editable: '<',
+            rectMode: '<',
             polygons: '<',
             api: '=',
             imageLink: '=',
@@ -95,11 +96,41 @@ app.directive('editImage', function ($http, consts, $timeout) {
                     if (!scope.editable) {
                         return;
                     }
-                    points.push({
-                        figure: drawPoint(e.offsetX, e.offsetY),
-                        x: e.offsetX,
-                        y: e.offsetY
-                    });
+                    scope.rectMode ? createPointsForRect(points, e) : createPoint(points, e);
+                });
+            }
+
+            function createPoint(points, e) {
+                points.push({
+                    figure: drawPoint(e.offsetX, e.offsetY),
+                    x: e.offsetX,
+                    y: e.offsetY
+                });
+            }
+
+            function createPointsForRect(points, e) {
+                points.push({
+                    figure: drawPoint(e.target.x.baseVal.value, e.target.y.baseVal.value),
+                    x: e.target.x.baseVal.value,
+                    y: e.target.y.baseVal.value
+                });
+
+                points.push({
+                    figure: drawPoint(e.target.x.baseVal.value + e.target.width.baseVal.value, e.target.y.baseVal.value),
+                    x: e.target.x.baseVal.value + e.target.width.baseVal.value,
+                    y: e.target.y.baseVal.value
+                });
+
+                points.push({
+                    figure: drawPoint(e.target.x.baseVal.value + e.target.width.baseVal.value, e.target.y.baseVal.value + e.target.height.baseVal.value),
+                    x: e.target.x.baseVal.value + e.target.width.baseVal.value,
+                    y: e.target.y.baseVal.value + e.target.height.baseVal.value
+                });
+
+                points.push({
+                    figure: drawPoint(e.target.x.baseVal.value, e.target.y.baseVal.value + e.target.height.baseVal.value),
+                    x: e.target.x.baseVal.value,
+                    y: e.target.y.baseVal.value + e.target.height.baseVal.value
                 });
             }
 

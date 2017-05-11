@@ -9,7 +9,8 @@ app.controller('buildingInfo', function($scope, Building) {
     $scope.state = {
         draw: false,
         editInfo: false,
-        editRooms: false
+        editRooms: false,
+        rectMode: false
     };
     Building.getBuildings().then(function(data){
         $scope.buildings = data;

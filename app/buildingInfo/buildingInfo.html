@@ -10,9 +10,9 @@
             <div class="col-sm-12">
                 <button type="button" class="btn btn-default right-offset" ng-class="{'btn-success': floor === active.floor}" ng-click="chooseFloor(floor)"
                         ng-repeat="floor in floors">{{::floor.name}}</button>
-                <button type="button" class="btn btn-default right-offset pull-right" ng-click="zoomIn()">+</button>
-                <button type="button" class="btn btn-default right-offset pull-right" ng-click="zoomOut()">-</button>
-                <button type="button" class="btn btn-default right-offset pull-right" ng-click="resetZoom()">Reset</button>
+                <button type="button" ng-hide="state.draw" class="btn btn-default right-offset pull-right" ng-click="zoomIn()">+</button>
+                <button type="button" ng-hide="state.draw" class="btn btn-default right-offset pull-right" ng-click="zoomOut()">-</button>
+                <button type="button" ng-hide="state.draw" class="btn btn-default right-offset pull-right" ng-click="resetZoom()">Reset</button>
             </div>
         </div>
 
@@ -24,6 +24,7 @@
 
                 <button ng-show="state.draw && !state.editRooms" ng-click="state.editRooms = true" class="btn btn-default">Add New Room</button>
                 <button ng-show="state.draw && state.editRooms" ng-click="state.editRooms = false; save()" class="btn btn-default">Create Room</button>
+                <button ng-show="state.draw && state.editRooms" ng-click="state.rectMode = !state.rectMode" class="btn btn-default right-offset">{{state.rectMode ? 'Disable Rect Mode' : 'Enable Rect Mode'}}</button>
             </div>
         </div>
 
@@ -40,7 +41,7 @@
         <div ng-if="state.draw" class="row">
             <div class="col-sm-12">
                 <edit-image image-link="active.floor.picture" polygons="active.floor.polygons" save="savePolygons(polygons)"
-                            api="api.editImageApi" editable="state.editRooms" id="edit-image"></edit-image>
+                            api="api.editImageApi" editable="state.editRooms" rect-mode="state.rectMode" id="edit-image"></edit-image>
             </div>
         </div>
 
