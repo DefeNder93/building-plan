@@ -113,7 +113,6 @@ app.directive('imageMap', function ($http, consts, Utils) {
             angular.element(el).mousedown(function(e){
                 mousedownCoords.x = e.offsetX;
                 mousedownCoords.y = e.offsetY;
-                angular.element('body').css('cursor','move');
             });
 
             angular.element(el).mouseup(function(e){
