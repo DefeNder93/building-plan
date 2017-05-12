@@ -19,6 +19,11 @@ app.directive('imageMap', function ($http, consts, Utils) {
                     $http.get(link).then(function(r){
                         createSvg(r.data);
                         initElements();
+			draw.on('mousewheel', function(e) {
+	    		     ptX = e.layerX;
+			     ptY = e.layerY;
+       	                     Utils.wheel(e, zoomIn, zoomOut);
+		        });
                     });
                 }
             });
@@ -99,14 +104,6 @@ app.directive('imageMap', function ($http, consts, Utils) {
                 var box = draw.viewbox();
                 draw.viewbox(box.x, box.y, box.width + zoomStep, box.height / box.width * (box.width + zoomStep))
             }
-
-            window.onmousewheel = function(e){
-                Utils.wheel(e, zoomIn, zoomOut);
-            };
-
-            window.onmousewheel = function(e){
-                Utils.wheel(e, zoomIn, zoomOut);
-            };
 
             // drag-n-drop
             var mousedownCoords = {};

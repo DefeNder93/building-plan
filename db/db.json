@@ -1,6 +1,312 @@
 {
-  "login": {
-    "password": "dfg"
-  },
-  "buildings": [{"id":1,"name":"Main Building","floors":[{"name":"1 floor","picture":"img/floor1.svg","polygons":[{"points":[{"figure":null,"x":159.84375,"y":1},{"figure":null,"x":559.84375,"y":2},{"figure":null,"x":562.84375,"y":260},{"figure":null,"x":159.84375,"y":257}],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[159.84375,1],[559.84375,2],[562.84375,260],[159.84375,257]]}},"active":false,"info":{"belonging":"Кафедра ядерной физики","type":"Кафедра","square":"50м","places":"5","equipment":"стул, стол"}},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[{"figure":null,"x":1337,"y":99},{"figure":null,"x":1385.84375,"y":101},{"figure":null,"x":1384.84375,"y":10},{"figure":null,"x":1336,"y":11}],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[1337,99],[1385.84375,101],[1384.84375,10],[1336,11]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}},"active":false},{"points":[],"figure":{"_stroke":"#000000","_event":null,"dom":{},"node":{},"type":"polygon","_array":{"value":[[0,0]]}}}]},{"name":"2 floor","picture":"img/floor2.svg"}]},{"id":2,"name":"Secondary Building","floors":[{"name":"1 floor","picture":"img/floor3.svg"}]}]
+  "login": {},
+  "buildings": [
+    {
+      "id": 1,
+      "name": "Корпус №1",
+      "floors": [
+        {
+          "name": "Первый этаж",
+          "picture": "img/floor1.svg",
+          "polygons": [
+            {
+              "points": [
+                {
+                  "figure": null,
+                  "x": 159.84375,
+                  "y": 1
+                },
+                {
+                  "figure": null,
+                  "x": 559.84375,
+                  "y": 2
+                },
+                {
+                  "figure": null,
+                  "x": 562.84375,
+                  "y": 260
+                },
+                {
+                  "figure": null,
+                  "x": 159.84375,
+                  "y": 257
+                }
+              ],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      159.84375,
+                      1
+                    ],
+                    [
+                      559.84375,
+                      2
+                    ],
+                    [
+                      562.84375,
+                      260
+                    ],
+                    [
+                      159.84375,
+                      257
+                    ]
+                  ]
+                }
+              },
+              "active": false,
+              "info": {
+                "belonging": "Кафедра ядерной физики",
+                "type": "Кафедра",
+                "square": "50м",
+                "places": "5",
+                "equipment": "стул, стол"
+              }
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [
+                {
+                  "figure": null,
+                  "x": 1337,
+                  "y": 99
+                },
+                {
+                  "figure": null,
+                  "x": 1385.84375,
+                  "y": 101
+                },
+                {
+                  "figure": null,
+                  "x": 1384.84375,
+                  "y": 10
+                },
+                {
+                  "figure": null,
+                  "x": 1336,
+                  "y": 11
+                }
+              ],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      1337,
+                      99
+                    ],
+                    [
+                      1385.84375,
+                      101
+                    ],
+                    [
+                      1384.84375,
+                      10
+                    ],
+                    [
+                      1336,
+                      11
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              },
+              "active": false
+            },
+            {
+              "points": [],
+              "figure": {
+                "_stroke": "#000000",
+                "_event": null,
+                "dom": {},
+                "node": {},
+                "type": "polygon",
+                "_array": {
+                  "value": [
+                    [
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2 floor",
+          "picture": "img/floor2.svg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Корпус #2",
+      "floors": [
+        {
+          "name": "Первый этаж",
+          "picture": "img/floor3.svg"
+        }
+      ]
+    }
+  ]
 }
