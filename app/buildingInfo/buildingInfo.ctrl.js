@@ -38,7 +38,8 @@ app.controller('buildingInfo', function($scope, Building) {
         }
     };
     $scope.saveBuildings = function() {
-        Building.setBuildings(deleteSvgFigures($scope.buildings));
+    //    Building.setBuildings(deleteSvgFigures($scope.buildings));
+        Building.setBuildings(deleteSvgFigures($scope.active.building));
     };
     $scope.setActivePolygon = function(polygon) {
         $scope.resetPolygonInfo();
@@ -72,15 +73,15 @@ app.controller('buildingInfo', function($scope, Building) {
 
     function deleteSvgFigures(buildings) {
         var buildingsCopy = angular.copy(buildings);
-        buildingsCopy.forEach(function(building){
-            building.floors.forEach(function(floor){
+    //    buildingsCopy.forEach(function(building){
+            buildingsCopy.floors.forEach(function(floor){
                 floor.polygons && floor.polygons.forEach(function(polygon){
                     polygon.points.forEach(function(point){
                         point.figure = null;
                     });
                 })
             });
-        });
+    //    });
         return buildingsCopy;
     }
 

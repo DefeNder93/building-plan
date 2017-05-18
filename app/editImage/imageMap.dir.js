@@ -9,21 +9,24 @@ app.directive('imageMap', function ($http, consts, Utils) {
         },
         link: function(scope, el, attrs) {
             var draw;
+	    var pgroup;
 
-            scope.api.zoomIn = zoomIn;
-            scope.api.zoomOut = zoomOut;
-            scope.api.resetZoom = resetViewbox;
+        //    scope.api.zoomIn = zoomIn;
+        //    scope.api.zoomOut = zoomOut;
+        //    scope.api.resetZoom = resetViewbox;
 
             scope.$watch('imageLink',function(link){
                 if (link) {
                     $http.get(link).then(function(r){
                         createSvg(r.data);
                         initElements();
-			draw.on('mousewheel', function(e) {
+			pgroup.draggy();
+			pgroup.panZoom();
+			/*draw.on('mousewheel', function(e) {
 	    		     ptX = e.layerX;
 			     ptY = e.layerY;
        	                     Utils.wheel(e, zoomIn, zoomOut);
-		        });
+		        });*/
                     });
                 }
             });
@@ -32,8 +35,11 @@ app.directive('imageMap', function ($http, consts, Utils) {
                 if (!scope.polygons || !scope.polygons.length) {
                     return;  // there is no polygons to init
                 }
-                scope.polygons.forEach(function(polygon){
+    	    scope.polygons.forEach(function(polygon){
                     drawPolygon(polygon);
+		    //b dao
+		    pgroup.add(polygon.figure)
+		    //e dao
                     polygon.active = false;
                     polygon.figure.mouseover(function(e){
                         var polygon = getPolygonByTargetNode(e.target);
@@ -81,20 +87,23 @@ app.directive('imageMap', function ($http, consts, Utils) {
                 polygon.figure = draw.polygon(coords);
                 polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
-
-            var zoomStep = consts.IMAGE_ZOOM_STEP || 20;
+	    
+            //var zoomStep = consts.IMAGE_ZOOM_STEP || 20;
             function createSvg(data) {
                 draw && (draw.remove());
-                draw = SVG('image-map').size(1200, 500); //.draggable();
+                draw = SVG('image-map');
                 draw.attr('class', 'scaling-svg');
                 resetViewbox();
-                draw.svg(data);
+		pgroup = draw.group();
+                //var svg = draw.svg(data);
+		//var base = svg.select('svg');
+	        pgroup.add(draw.svg(data).select('svg').first());
             }
-
+	    
             function resetViewbox() {
                 draw.viewbox(0, 0, 1898.1851, 1601.6219);  // initial values
             }
-
+	    /*
             function zoomIn() {
                 var box = draw.viewbox();
                 draw.viewbox(box.x, box.y, box.width - zoomStep, box.height / box.width * (box.width - zoomStep))
@@ -103,10 +112,10 @@ app.directive('imageMap', function ($http, consts, Utils) {
             function zoomOut() {
                 var box = draw.viewbox();
                 draw.viewbox(box.x, box.y, box.width + zoomStep, box.height / box.width * (box.width + zoomStep))
-            }
+            } */
 
             // drag-n-drop
-            var mousedownCoords = {};
+/*            var mousedownCoords = {};
             angular.element(el).mousedown(function(e){
                 mousedownCoords.x = e.offsetX;
                 mousedownCoords.y = e.offsetY;
@@ -119,7 +128,7 @@ app.directive('imageMap', function ($http, consts, Utils) {
                     var viewbox = draw.viewbox();
                     draw.viewbox({ x: viewbox.x - xDifference, y: viewbox.y - yDifference, width: viewbox.width, height: viewbox.height })
                 }
-            });
+            });*/
         }
     };
 });

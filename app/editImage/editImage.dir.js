@@ -77,6 +77,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
             });
 
             function initElements() {
+	        $('rect').css("pointer-events","visible")
                 if (!scope.polygons || !scope.polygons.length) {
                     return;  // there is no polygons to init
                 }
@@ -92,15 +93,47 @@ app.directive('editImage', function ($http, consts, $timeout) {
 
             function drawSvg(data) {
                 createSvg(data);
-                draw.click(function(e) {
+		 
+		 $('rect').on('dblclick', function() {
+			if (!scope.editable) {
+                        return;                    }
+			createRectPoints(this.x.baseVal.value,this.y.baseVal.value,this.x.baseVal.value+this.width.baseVal.value,this.y.baseVal.value+this.height.baseVal.value)
+			createPolygon();
+		    })
+            /*    draw.click(function(e) {
                     if (!scope.editable) {
                         return;
                     }
                     scope.rectMode ? createPointsForRect(points, e) : createPoint(points, e);
-                });
+                });*/
             }
-
-            function createPoint(points, e) {
+	    function createRectPoints(_x,_y,_x1,_y1) {
+		var xR = _x;
+		var yR = _y;
+		var x1R = _x1;
+		var y1R = _y1;
+		points.push({
+                    figure: drawPoint(xR, yR),
+                    x: xR,
+                    y: yR
+                });
+		points.push({
+                    figure: drawPoint(x1R, yR),
+                    x: x1R,
+                    y: yR
+                });
+		points.push({
+                    figure: drawPoint(x1R, y1R),
+                    x: x1R,
+                    y: y1R
+                });
+		points.push({
+                    figure: drawPoint(xR, y1R),
+                    x: xR,
+                    y: y1R
+                });
+	    }
+/*            function createPoint(points, e) {
                 points.push({
                     figure: drawPoint(e.offsetX, e.offsetY),
                     x: e.offsetX,
@@ -132,11 +165,11 @@ app.directive('editImage', function ($http, consts, $timeout) {
                     x: e.target.x.baseVal.value,
                     y: e.target.y.baseVal.value + e.target.height.baseVal.value
                 });
-            }
+            } */
 
             function drawPoint(x,y) {
                 var point = draw.circle(8).fill(consts.POINT_COLOR).opacity(consts.EDIT_POINTS_OPACITY).move(x-4, y-4);
-                point.draggable().on('dragend', dragPoint);
+                point.draggy().on('dragend', dragPoint);
                 return point;
             }
 
@@ -173,9 +206,10 @@ app.directive('editImage', function ($http, consts, $timeout) {
 
             function createSvg(data) {
                 draw && (draw.remove());
-                draw = SVG('edit-image').size(1899, 1602);
+                draw = SVG('edit-image').size(1680, 1260);
+		//.size(1899, 1602);
                 draw.svg(data);
-            }
+	    }
         }
     };
 });
