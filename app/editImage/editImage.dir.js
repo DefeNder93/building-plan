@@ -61,6 +61,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
                 polygon.figure = draw.polygon(coords);
                 points.forEach(function(point){
                     point.figure.node.parentElement.appendChild(point.figure.node);
+		    pgroup.add(point.figure);	
                 });
                 polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
 		pgroup.add(polygon.figure);
