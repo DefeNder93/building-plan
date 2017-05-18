@@ -10,6 +10,27 @@ app.directive('editImage', function ($http, consts, $timeout) {
             save: '&'
         },
         link: function(scope, el, attrs) {
+            var points = [],
+                polygons = [],
+		draw,
+		pgroup;
+
+            scope.$watch('imageLink',function(link){
+                if (link) {
+                    $http.get(link).then(function(r){
+                        drawSvg(r.data);
+                        initElements();
+			pgroup.draggy();
+			var drawHeight = draw.node.height.baseVal.value
+			var drawWidth = draw.node.width.baseVal.value
+			var layerHeight = draw.select('svg').first().node.height.baseVal.value;
+			var layerWidth = draw.select('svg').first().node.width.baseVal.value;
+			var zoomFactor = (drawHeight>drawWidth? drawWidth/layerWidth : drawHeight/layerHeight);
+			pgroup.panZoom().zoom(zoomFactor);
+                    });
+                }
+            });
+
             $timeout(function(){
                 scope.api = {
                     clear: clear,
@@ -17,9 +38,6 @@ app.directive('editImage', function ($http, consts, $timeout) {
                 };
             });
 
-            var points = [],
-                polygons = [];
-            
             function clear() {
                 points.forEach(function(point){
                     point.figure.remove();
@@ -45,6 +63,7 @@ app.directive('editImage', function ($http, consts, $timeout) {
                     point.figure.node.parentElement.appendChild(point.figure.node);
                 });
                 polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
+		pgroup.add(polygon.figure);
                 polygon.points = [].concat(points);
                 polygons.push(polygon);
                 points = [];
@@ -65,17 +84,6 @@ app.directive('editImage', function ($http, consts, $timeout) {
                 polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
             
-            var draw;
-
-            scope.$watch('imageLink',function(link){
-                if (link) {
-                    $http.get(link).then(function(r){
-                        drawSvg(r.data);
-                        initElements();
-                    });
-                }
-            });
-
             function initElements() {
 	        $('rect').css("pointer-events","visible")
                 if (!scope.polygons || !scope.polygons.length) {
@@ -87,7 +95,9 @@ app.directive('editImage', function ($http, consts, $timeout) {
                     drawPolygon(polygon);
                     polygon.points.forEach(function(el){
                         el.figure = drawPoint(el.x, el.y);
+			pgroup.add(el.figure);
                     });
+		   pgroup.add(polygon.figure);
                 });
             }
 
@@ -100,12 +110,6 @@ app.directive('editImage', function ($http, consts, $timeout) {
 			createRectPoints(this.x.baseVal.value,this.y.baseVal.value,this.x.baseVal.value+this.width.baseVal.value,this.y.baseVal.value+this.height.baseVal.value)
 			createPolygon();
 		    })
-            /*    draw.click(function(e) {
-                    if (!scope.editable) {
-                        return;
-                    }
-                    scope.rectMode ? createPointsForRect(points, e) : createPoint(points, e);
-                });*/
             }
 	    function createRectPoints(_x,_y,_x1,_y1) {
 		var xR = _x;
@@ -133,39 +137,6 @@ app.directive('editImage', function ($http, consts, $timeout) {
                     y: y1R
                 });
 	    }
-/*            function createPoint(points, e) {
-                points.push({
-                    figure: drawPoint(e.offsetX, e.offsetY),
-                    x: e.offsetX,
-                    y: e.offsetY
-                });
-            }
-
-            function createPointsForRect(points, e) {
-                points.push({
-                    figure: drawPoint(e.target.x.baseVal.value, e.target.y.baseVal.value),
-                    x: e.target.x.baseVal.value,
-                    y: e.target.y.baseVal.value
-                });
-
-                points.push({
-                    figure: drawPoint(e.target.x.baseVal.value + e.target.width.baseVal.value, e.target.y.baseVal.value),
-                    x: e.target.x.baseVal.value + e.target.width.baseVal.value,
-                    y: e.target.y.baseVal.value
-                });
-
-                points.push({
-                    figure: drawPoint(e.target.x.baseVal.value + e.target.width.baseVal.value, e.target.y.baseVal.value + e.target.height.baseVal.value),
-                    x: e.target.x.baseVal.value + e.target.width.baseVal.value,
-                    y: e.target.y.baseVal.value + e.target.height.baseVal.value
-                });
-
-                points.push({
-                    figure: drawPoint(e.target.x.baseVal.value, e.target.y.baseVal.value + e.target.height.baseVal.value),
-                    x: e.target.x.baseVal.value,
-                    y: e.target.y.baseVal.value + e.target.height.baseVal.value
-                });
-            } */
 
             function drawPoint(x,y) {
                 var point = draw.circle(8).fill(consts.POINT_COLOR).opacity(consts.EDIT_POINTS_OPACITY).move(x-4, y-4);
@@ -206,9 +177,10 @@ app.directive('editImage', function ($http, consts, $timeout) {
 
             function createSvg(data) {
                 draw && (draw.remove());
-                draw = SVG('edit-image').size(1680, 1260);
-		//.size(1899, 1602);
-                draw.svg(data);
+                draw = SVG('edit-image').size('100%', $(window).height());
+                //draw.svg(data);
+		pgroup = draw.group();
+		pgroup.add(draw.svg(data).select('svg').first());
 	    }
         }
     };

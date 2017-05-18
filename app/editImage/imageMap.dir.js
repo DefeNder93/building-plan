@@ -11,22 +11,18 @@ app.directive('imageMap', function ($http, consts, Utils) {
             var draw;
 	    var pgroup;
 
-        //    scope.api.zoomIn = zoomIn;
-        //    scope.api.zoomOut = zoomOut;
-        //    scope.api.resetZoom = resetViewbox;
-
             scope.$watch('imageLink',function(link){
                 if (link) {
                     $http.get(link).then(function(r){
                         createSvg(r.data);
                         initElements();
 			pgroup.draggy();
-			pgroup.panZoom();
-			/*draw.on('mousewheel', function(e) {
-	    		     ptX = e.layerX;
-			     ptY = e.layerY;
-       	                     Utils.wheel(e, zoomIn, zoomOut);
-		        });*/
+			var drawHeight = draw.node.height.baseVal.value
+			var drawWidth = draw.node.width.baseVal.value
+			var layerHeight = draw.select('svg').first().node.height.baseVal.value;
+			var layerWidth = draw.select('svg').first().node.width.baseVal.value;
+			var zoomFactor = (drawHeight>drawWidth? drawWidth/layerWidth : drawHeight/layerHeight);
+			pgroup.panZoom().zoom(zoomFactor);
                     });
                 }
             });
@@ -88,48 +84,13 @@ app.directive('imageMap', function ($http, consts, Utils) {
                 polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
 	    
-            //var zoomStep = consts.IMAGE_ZOOM_STEP || 20;
             function createSvg(data) {
                 draw && (draw.remove());
-                draw = SVG('image-map');
-                draw.attr('class', 'scaling-svg');
-                resetViewbox();
+                draw = SVG('image-map').size('100%',$(window).height());
 		pgroup = draw.group();
-                //var svg = draw.svg(data);
-		//var base = svg.select('svg');
-	        pgroup.add(draw.svg(data).select('svg').first());
+		pgroup.add(draw.svg(data).select('svg').first());
             }
-	    
-            function resetViewbox() {
-                draw.viewbox(0, 0, 1898.1851, 1601.6219);  // initial values
-            }
-	    /*
-            function zoomIn() {
-                var box = draw.viewbox();
-                draw.viewbox(box.x, box.y, box.width - zoomStep, box.height / box.width * (box.width - zoomStep))
-            }
-
-            function zoomOut() {
-                var box = draw.viewbox();
-                draw.viewbox(box.x, box.y, box.width + zoomStep, box.height / box.width * (box.width + zoomStep))
-            } */
-
-            // drag-n-drop
-/*            var mousedownCoords = {};
-            angular.element(el).mousedown(function(e){
-                mousedownCoords.x = e.offsetX;
-                mousedownCoords.y = e.offsetY;
-            });
-
-            angular.element(el).mouseup(function(e){
-                if (mousedownCoords.x && mousedownCoords.y) {
-                    var xDifference =  e.offsetX-mousedownCoords.x;
-                    var yDifference =  e.offsetY-mousedownCoords.y;
-                    var viewbox = draw.viewbox();
-                    draw.viewbox({ x: viewbox.x - xDifference, y: viewbox.y - yDifference, width: viewbox.width, height: viewbox.height })
-                }
-            });*/
-        }
+	}
     };
 });
 
