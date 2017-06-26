@@ -13,8 +13,8 @@ Make all of the following prerequisites are installed on the development machine
 ## Cloning the repository
   
 ```bash
-bitpool-os$: git clone https://github.com/DefeNder93/building-plan.git
-bitpool-os$: git checkout master
+root-dir$: git clone https://github.com/DefeNder93/building-plan.git
+root-dir$: git checkout master
 ```
 
 ## Running the application
