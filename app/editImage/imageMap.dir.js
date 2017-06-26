@@ -9,16 +9,20 @@ app.directive('imageMap', function ($http, consts, Utils) {
         },
         link: function(scope, el, attrs) {
             var draw;
-
-            scope.api.zoomIn = zoomIn;
-            scope.api.zoomOut = zoomOut;
-            scope.api.resetZoom = resetViewbox;
+	    var pgroup;
 
             scope.$watch('imageLink',function(link){
                 if (link) {
                     $http.get(link).then(function(r){
                         createSvg(r.data);
                         initElements();
+			pgroup.draggy();
+			var drawHeight = draw.node.height.baseVal.value
+			var drawWidth = draw.node.width.baseVal.value
+			var layerHeight = draw.select('svg').first().node.height.baseVal.value;
+			var layerWidth = draw.select('svg').first().node.width.baseVal.value;
+			var zoomFactor = (drawHeight>drawWidth? drawWidth/layerWidth : drawHeight/layerHeight);
+			pgroup.panZoom().zoom(zoomFactor);
                     });
                 }
             });
@@ -27,8 +31,11 @@ app.directive('imageMap', function ($http, consts, Utils) {
                 if (!scope.polygons || !scope.polygons.length) {
                     return;  // there is no polygons to init
                 }
-                scope.polygons.forEach(function(polygon){
+    	    scope.polygons.forEach(function(polygon){
                     drawPolygon(polygon);
+		    //b dao
+		    pgroup.add(polygon.figure)
+		    //e dao
                     polygon.active = false;
                     polygon.figure.mouseover(function(e){
                         var polygon = getPolygonByTargetNode(e.target);
@@ -76,54 +83,14 @@ app.directive('imageMap', function ($http, consts, Utils) {
                 polygon.figure = draw.polygon(coords);
                 polygon.figure.fill(consts.POLYGON_COLOR).opacity(consts.POLYGONS_OPACITY);
             }
-
-            var zoomStep = consts.IMAGE_ZOOM_STEP || 20;
+	    
             function createSvg(data) {
                 draw && (draw.remove());
-                draw = SVG('image-map').size(1200, 500); //.draggable();
-                draw.attr('class', 'scaling-svg');
-                resetViewbox();
-                draw.svg(data);
+                draw = SVG('image-map').size('100%',$(window).height());
+		pgroup = draw.group();
+		pgroup.add(draw.svg(data).select('svg').first());
             }
-
-            function resetViewbox() {
-                draw.viewbox(0, 0, 1898.1851, 1601.6219);  // initial values
-            }
-
-            function zoomIn() {
-                var box = draw.viewbox();
-                draw.viewbox(box.x, box.y, box.width - zoomStep, box.height / box.width * (box.width - zoomStep))
-            }
-
-            function zoomOut() {
-                var box = draw.viewbox();
-                draw.viewbox(box.x, box.y, box.width + zoomStep, box.height / box.width * (box.width + zoomStep))
-            }
-
-            window.onmousewheel = function(e){
-                Utils.wheel(e, zoomIn, zoomOut);
-            };
-
-            window.onmousewheel = function(e){
-                Utils.wheel(e, zoomIn, zoomOut);
-            };
-
-            // drag-n-drop
-            var mousedownCoords = {};
-            angular.element(el).mousedown(function(e){
-                mousedownCoords.x = e.offsetX;
-                mousedownCoords.y = e.offsetY;
-            });
-
-            angular.element(el).mouseup(function(e){
-                if (mousedownCoords.x && mousedownCoords.y) {
-                    var xDifference =  e.offsetX-mousedownCoords.x;
-                    var yDifference =  e.offsetY-mousedownCoords.y;
-                    var viewbox = draw.viewbox();
-                    draw.viewbox({ x: viewbox.x - xDifference, y: viewbox.y - yDifference, width: viewbox.width, height: viewbox.height })
-                }
-            });
-        }
+	}
     };
 });
 

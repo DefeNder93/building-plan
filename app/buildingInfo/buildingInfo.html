@@ -18,24 +18,84 @@
 
         <div class="row">
             <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 10px">
-                <button ng-hide="state.draw" ng-click="state.draw = true" class="btn btn-default right-offset">Edit Rooms</button>
-                <button ng-show="state.draw" ng-click="state.draw = false; save()" class="btn btn-default right-offset">View</button>
-                <button ng-show="!state.draw && active.polygon" ng-click="deleteSelectedPolygon(); saveBuildings()" class="btn btn-default">Delete Selected Room</button>
-
+                <button ng-hide="state.draw" ng-click="state.draw = true; state.editRooms = true" class="btn btn-default right-offset">Режим редактирования</button>
+                <button ng-show="state.draw" ng-click="state.draw = false; state.editRooms = false; saveBuildings(); getBuildings();" class="btn btn-default right-offset">Режим просмотра</button>
+                <button ng-show="!state.draw && active.polygon" ng-click="deleteSelectedPolygon(); saveBuildings()" class="btn btn-default">Удалить помещение</button>
+		<!--
                 <button ng-show="state.draw && !state.editRooms" ng-click="state.editRooms = true" class="btn btn-default">Add New Room</button>
                 <button ng-show="state.draw && state.editRooms" ng-click="state.editRooms = false; save()" class="btn btn-default">Create Room</button>
                 <button ng-show="state.draw && state.editRooms" ng-click="state.rectMode = !state.rectMode" class="btn btn-default right-offset">{{state.rectMode ? 'Disable Rect Mode' : 'Enable Rect Mode'}}</button>
+		-->
             </div>
         </div>
 
         <div ng-if="!state.draw" class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-9">
                 <div class="scaling-svg-container"
                      style="padding-bottom: 84% /* 100% * 1601/1898 */">
                     <image-map polygons="active.floor.polygons" image-link="active.floor.picture" id="image-map"
                         set-active-polygon="setActivePolygon(polygon); state.editInfo = false" api="api.imageMapApi"></image-map>
                 </div>
             </div>
+	    <!-- Experimental layer-->
+        <div ng-show="active.polygon" class="row">
+            <div class="col-sm-3">
+
+                <div class="row bottom-offset">
+                    <div class="col-sm-12">
+                        <button ng-hide="state.editInfo" ng-click="state.editInfo = true; rememberOldPolygonInfo()" class="btn btn-default">Edit</button>
+                        <button ng-show="state.editInfo" ng-click="state.editInfo = false; saveBuildings(); clearOldPolygonInfo()" class="btn btn-default">Save</button>
+                        <button ng-show="state.editInfo" ng-click="resetPolygonInfo()" class="btn btn-warning">Cancel</button>
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <tbody>
+                    	    <tr>
+                            <th scope="row">Номер аудитории</th>
+                            <td>
+                                <span ng-hide="state.editInfo">{{active.polygon.info.roomNumber ? active.polygon.info.roomNumber : '-'}}</span>
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.roomNumber" ng-change="initPolygonInfo(active.polygon)">
+                            </td>
+			    </tr><tr>
+                            <th scope="row">Принадлежность</th>
+                            <td>
+                                <span ng-hide="state.editInfo">{{active.polygon.info.belonging ? active.polygon.info.belonging : '-'}}</span>
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.belonging" ng-change="initPolygonInfo(active.polygon)">
+                            </td>
+			    </tr><tr>
+                            <th scope="row">Тип помещения</th>
+                            <td>
+                                <span ng-hide="state.editInfo">{{active.polygon.info.type ? active.polygon.info.type : '-'}}</span>
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.type" ng-change="initPolygonInfo(active.polygon)">
+                            </td>
+			    </tr><tr>
+                            <th scope="row">Площадь помещения</th>
+                            <td>
+                                <span ng-hide="state.editInfo">{{active.polygon.info.square ? active.polygon.info.square : '-'}}</span>
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.square" ng-change="initPolygonInfo(active.polygon)">
+                            </td>
+			    </tr><tr>
+                            <th scope="row">Количество посадочных мест</th>
+                            <td>
+                                <span ng-hide="state.editInfo">{{active.polygon.info.places ? active.polygon.info.places : '-'}}</span>
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.places" ng-change="initPolygonInfo(active.polygon)">
+                            </td>
+			    </tr><tr>
+                            <th scope="row">Оборудование</th>
+                            <td>
+                                <span ng-hide="state.editInfo">{{active.polygon.info.equipment ? active.polygon.info.equipment : '-'}}</span>
+                                <input class="form-control" type="text" ng-show="state.editInfo" ng-model="active.polygon.info.equipment" ng-change="initPolygonInfo(active.polygon)">
+                            </td>
+                           </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+	    <!-- -->
         </div>
 
         <div ng-if="state.draw" class="row">
@@ -44,7 +104,7 @@
                             api="api.editImageApi" editable="state.editRooms" rect-mode="state.rectMode" id="edit-image"></edit-image>
             </div>
         </div>
-
+<!--
         <div ng-show="active.polygon" class="row">
             <div class="col-sm-12">
 
@@ -100,5 +160,5 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

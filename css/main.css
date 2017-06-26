@@ -10,9 +10,6 @@ header {
     padding-bottom: 100%;
     /* override this inline for aspect ratio other than square */
 }
-#image-map{
-    cursor: move;
-}
 .scaling-svg {
     position: absolute;
     height: 100%;
